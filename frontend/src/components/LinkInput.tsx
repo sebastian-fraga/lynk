@@ -6,6 +6,8 @@ import VideoPreview from "./VideoPreview";
 
 import { IconClipboard, IconLoader2, IconCornerDownLeft } from "@tabler/icons-react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function LinkInput() {
     const [url, setUrl] = useState("");
     const [loadingInfo, setLoadingInfo] = useState(false);
@@ -49,7 +51,7 @@ export default function LinkInput() {
         setVideoInfo(null);
 
         try {
-            const response = await fetch("/api/info", {
+            const response = await fetch(`${API_URL}/api/info`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

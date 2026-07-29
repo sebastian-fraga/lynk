@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export function useDownloader() {
     const [loading, setLoading] = useState(false);
     const [statusText, setStatusText] = useState("");
@@ -17,7 +19,7 @@ export function useDownloader() {
         setError(null);
 
         try {
-            const response = await fetch("/api/download", {
+            const response = await fetch(`${API_URL}/api/download`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,7 +38,9 @@ export function useDownloader() {
                 );
             }
 
-            const fileResponse = await fetch(data.downloadUrl);
+            const fileResponse = await fetch(
+                `${API_URL}${data.downloadUrl}`
+            );
 
             if (!fileResponse.ok) {
                 throw new Error("Error descargando archivo.");
