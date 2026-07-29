@@ -1,6 +1,7 @@
 {
   "packages": {
     "ffmpeg": "latest",
-    "yt-dlp": "latest"
+    "yt-dlp": "latest",
+    "deno": "latest"
   }
 }
