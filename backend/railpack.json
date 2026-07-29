@@ -1,6 +1,6 @@
 {
-  "packages": [
-    "ffmpeg",
-    "yt-dlp"
-  ]
+  "packages": {
+    "ffmpeg": "latest",
+    "yt-dlp": "latest"
+  }
 }
