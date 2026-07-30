@@ -80,12 +80,12 @@ export default function LinkInput() {
     }
 
     return (
-        <div className="flex flex-col items-center gap-3 max-w-full">
+        <div className="flex flex-col items-center gap-3 w-full px-4">
             <form
                 onSubmit={handleSubmit}
-                className="flex items-center justify-center gap-2 text-black w-2xl px-4"
+                className="flex items-center justify-center gap-2 w-full max-w-2xl text-black"
             >
-                <div className="relative flex-1">
+                <div className="relative flex-1 min-w-0">
                     <button
                         type="button"
                         onClick={handlePaste}
@@ -94,6 +94,7 @@ export default function LinkInput() {
                     >
                         <IconClipboard size={20} />
                     </button>
+
                     <input
                         type="text"
                         value={url}
@@ -105,10 +106,11 @@ export default function LinkInput() {
                         placeholder="Ejemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                     />
                 </div>
+
                 <button
                     type="submit"
                     disabled={loadingInfo || !url.trim()}
-                    className="bg-green-400 hover:bg-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors py-2.5 px-5 rounded-md text-black flex items-center justify-center min-w-13 h-12 cursor-pointer"
+                    className="bg-green-400 hover:bg-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors px-4 sm:px-5 rounded-md text-black flex items-center justify-center h-12 cursor-pointer shrink-0"
                 >
                     {loadingInfo ? (
                         <IconLoader2 className="animate-spin" size={24} />
@@ -117,6 +119,7 @@ export default function LinkInput() {
                     )}
                 </button>
             </form>
+
             {videoInfo && (
                 <VideoPreview
                     videoInfo={videoInfo}
@@ -124,17 +127,18 @@ export default function LinkInput() {
                     onDownload={(type) => download(type, url)}
                 />
             )}
+
             {loading && statusText && (
-                <p className="text-green-300 text-sm font-medium animate-pulse">
+                <p className="text-green-300 text-sm font-medium animate-pulse text-center">
                     {statusText}
                 </p>
             )}
+
             {(error || downloadError) && (
-                <p>
+                <p className="text-center text-sm">
                     {error || downloadError}
                 </p>
             )}
         </div>
-
     );
 }
