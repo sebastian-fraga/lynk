@@ -5,10 +5,13 @@ import path from "node:path";
 const execFileAsync = promisify(execFile);
 
 const DOWNLOAD_DIR = path.resolve("downloads");
+const COOKIES_PATH = "/tmp/cookies.txt";
 
 export async function downloadMedia(url, type = "video") {
     const args = [
         "--restrict-filenames",
+        "--cookies",
+        COOKIES_PATH,
         "--print",
         "after_move:filepath",
         "-o",
@@ -16,16 +19,9 @@ export async function downloadMedia(url, type = "video") {
     ];
 
     if (type === "audio") {
-        args.push(
-            "-x",
-            "--audio-format",
-            "mp3",
-        );
+        args.push("-x", "--audio-format", "mp3");
     } else {
-        args.push(
-            "-f",
-            "best",
-        );
+        args.push("-f", "best");
     }
 
     args.push(url);

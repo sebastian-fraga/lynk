@@ -3,8 +3,12 @@ import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 
+const COOKIES_PAT = "/tmp/cookies.txt";
+
 export async function getVideoInfo(url) {
     const { stdout } = await execFileAsync("yt-dlp", [
+        "--cookies",
+        COOKIES_PATH,
         "--dump-json",
         "--no-download",
         url,

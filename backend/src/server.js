@@ -3,6 +3,16 @@ import express from "express";
 import cors from "cors";
 import downloadRouter from "./routes/download.js";
 import infoRouter from "./routes/info.js"
+import fs from "node:fs";
+
+const cookiesPath = "/tmp/cookies.txt";
+
+if (process.env.YTDLP_COOKIES_B64) {
+    fs.writeFileSync(cookiesPath, Buffer.from(process.env.YTDLP_COOKIES_B64, "base64"));
+    console.log("cookies.txt generado en", cookiesPath);
+} else {
+    console.warn("YTDLP_COOKIES_B64 no está definida");
+}
 
 const app = express();
 
