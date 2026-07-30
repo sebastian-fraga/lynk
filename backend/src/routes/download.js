@@ -108,7 +108,7 @@ router.get("/file", async (req, res) => {
             });
         }
 
-        res.download(filePath, (err) => {
+        res.download(filePath, path.basename(filePath), (err) => {
             if (err) {
                 console.error("ERROR EN DESCARGA:", err.message);
                 return;
