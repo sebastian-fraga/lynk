@@ -1,13 +1,5 @@
-import { YouTubeIcon } from "./icons/YouTubeIcon";
-
+import { platforms } from "../data/platforms";
 import { Chip } from "./ui/Chip";
-
-const platforms = [
-    {
-        name: "YouTube",
-        icon: YouTubeIcon,
-    },
-];
 
 export default function SupportedPlatforms() {
     return (
@@ -17,7 +9,7 @@ export default function SupportedPlatforms() {
             <div className="flex flex-wrap justify-center gap-3">
                 {platforms.map((platform) => (
                     <Chip
-                        key={platform.name}
+                        key={platform.id}
                         icon={platform.icon}
                         text={platform.name}
                     />

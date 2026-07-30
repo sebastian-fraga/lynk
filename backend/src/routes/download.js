@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { Router } from "express";
 import path from "node:path";
-import { downloadMedia } from "../services/ytdlp.js";
+import { downloadMedia } from "../services/downloader/index.js";
 import fs from "node:fs";
 
 const router = Router();
@@ -47,6 +47,7 @@ router.post("/", async (req, res) => {
 
     try {
         const filePath = await downloadMedia(url, type, (progress) => {
+            console.log("FILEPATH GENERADO:", filePath);
             const entry = downloadCache.get(downloadId);
             if (entry) entry.progress = progress;
         });
@@ -81,6 +82,7 @@ router.get("/progress", (req, res) => {
         progress: entry.progress,
         downloadUrl:
             entry.status === "ready" ? `/api/download/file?id=${id}` : null,
+        filename: entry.filename || null,
         error: entry.error || null,
     });
 });

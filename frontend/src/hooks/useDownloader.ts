@@ -78,7 +78,7 @@ export function useDownloader() {
 
                             const link = document.createElement("a");
                             link.href = blobUrl;
-                            link.download = progressData.filename || "download";
+                            link.download = data.filename || "download";
 
                             document.body.appendChild(link);
                             link.click();

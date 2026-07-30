@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 import { useDownloader } from "../hooks/useDownloader";
+import { detectPlatform } from "../utils/detectPlatform";
 
 import VideoPreview from "./VideoPreview";
 
@@ -47,6 +48,20 @@ export default function LinkInput() {
         e.preventDefault();
 
         if (!url.trim()) return;
+
+        const platform = detectPlatform(url);
+
+        switch (platform) {
+            case "invalid":
+                setError("Ingresá una URL válida.");
+                setVideoInfo(null);
+                return;
+
+            case "unsupported":
+                setError("Esta plataforma todavía no está soportada.");
+                setVideoInfo(null);
+                return;
+        }
 
         setLoadingInfo(true);
         setError(null);
@@ -104,7 +119,7 @@ export default function LinkInput() {
                             setUrl(e.target.value);
                             if (error) setError(null);
                         }}
-                        className="bg-green-50 w-full h-12 pl-14 pr-4 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-green-400"
+                        className="bg-green-50 w-full h-12 pl-14 pr-4 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-green-400 transition-all"
                         placeholder="Ejemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                     />
                 </div>

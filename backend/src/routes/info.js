@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getVideoInfo } from "../services/info.js";
+import { getMediaInfo } from "../services/downloader/index.js";
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     }
 
     try {
-        const info = await getVideoInfo(url);
+        const info = await getMediaInfo(url);
 
         res.json(info);
     } catch (error) {
