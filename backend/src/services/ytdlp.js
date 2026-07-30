@@ -59,3 +59,46 @@ export function downloadMedia(url, type = "video", onProgress) {
         });
     });
 }
+
+export function getVideoInfo(url) {
+    return new Promise((resolve, reject) => {
+        const args = [
+            "--dump-json",
+            "--no-playlist",
+            "--cookies",
+            COOKIES_PATH,
+            url,
+        ];
+
+        const proc = spawn("yt-dlp", args);
+
+        let output = "";
+        let error = "";
+
+        proc.stdout.on("data", (chunk) => {
+            output += chunk.toString();
+        });
+
+        proc.stderr.on("data", (chunk) => {
+            error += chunk.toString();
+        });
+
+        proc.on("close", (code) => {
+            if (code !== 0) {
+                return reject(new Error(error));
+            }
+
+            try {
+                const data = JSON.parse(output);
+
+                resolve({
+                    title: data.title,
+                    thumbnail: data.thumbnail,
+                    channel: data.uploader,
+                });
+            } catch {
+                reject(new Error("No se pudo procesar la información."));
+            }
+        });
+    });
+}
