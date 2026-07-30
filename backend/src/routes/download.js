@@ -47,10 +47,11 @@ router.post("/", async (req, res) => {
 
     try {
         const filePath = await downloadMedia(url, type, (progress) => {
-            console.log("FILEPATH GENERADO:", filePath);
             const entry = downloadCache.get(downloadId);
             if (entry) entry.progress = progress;
         });
+
+        console.log("FILEPATH GENERADO:", filePath);
 
         downloadCache.set(downloadId, {
             status: "ready",
