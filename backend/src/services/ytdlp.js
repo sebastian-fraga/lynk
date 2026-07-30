@@ -1,32 +1,61 @@
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
+import { spawn } from "node:child_process";
 import path from "node:path";
-
-const execFileAsync = promisify(execFile);
 
 const DOWNLOAD_DIR = path.resolve("downloads");
 const COOKIES_PATH = "/tmp/cookies.txt";
 
-export async function downloadMedia(url, type = "video") {
-    const args = [
-        "--restrict-filenames",
-        "--cookies",
-        COOKIES_PATH,
-        "--print",
-        "after_move:filepath",
-        "-o",
-        `${DOWNLOAD_DIR}/%(title)s.%(ext)s`,
-    ];
+export function downloadMedia(url, type = "video", onProgress) {
+    return new Promise((resolve, reject) => {
+        const args = [
+            "--restrict-filenames",
+            "--no-playlist",
+            "--newline",
+            "--cookies",
+            COOKIES_PATH,
+            "--print",
+            "after_move:filepath",
+            "-o",
+            `${DOWNLOAD_DIR}/%(title)s.%(ext)s`,
+        ];
 
-    if (type === "audio") {
-        args.push("-x", "--audio-format", "mp3");
-    } else {
-        args.push("-f", "best");
-    }
+        if (type === "audio") {
+            args.push("-x", "--audio-format", "mp3");
+        } else {
+            args.push("-f", "best");
+        }
 
-    args.push(url);
+        args.push(url);
 
-    const { stdout } = await execFileAsync("yt-dlp", args);
+        const proc = spawn("yt-dlp", args);
+        let filePath = "";
+        let stderr = "";
 
-    return stdout.trim();
+        proc.stdout.on("data", (chunk) => {
+            const text = chunk.toString();
+
+            const match = text.match(/\[download\]\s+(\d+\.?\d*)%/);
+            if (match && onProgress) {
+                onProgress(parseFloat(match[1]));
+            }
+
+            const lines = text.trim().split("\n");
+            const last = lines[lines.length - 1];
+            if (last && !last.includes("[") && last.includes("/")) {
+                filePath = last.trim();
+            }
+        });
+
+        proc.stderr.on("data", (chunk) => {
+            stderr += chunk.toString();
+        });
+
+        proc.on("close", (code) => {
+            if (code !== 0) {
+                return reject(
+                    new Error(stderr || `yt-dlp salió con código ${code}`),
+                );
+            }
+            resolve(filePath);
+        });
+    });
 }

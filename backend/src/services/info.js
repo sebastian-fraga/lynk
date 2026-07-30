@@ -8,6 +8,7 @@ const COOKIES_PATH = "/tmp/cookies.txt";
 
 export async function getVideoInfo(url) {
     const { stdout } = await execFileAsync("yt-dlp", [
+        "--no-playlist",
         "--cookies",
         COOKIES_PATH,
         "--dump-json",

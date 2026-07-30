@@ -31,34 +31,58 @@ router.post("/", async (req, res) => {
     const { url, type = "video" } = req.body;
 
     if (!url) {
-        return res.status(400).json({
-            error: "La URL es requerida.",
-        });
+        return res.status(400).json({ error: "La URL es requerida." });
     }
 
-    try {
-        const filePath = await downloadMedia(url, type);
+    const downloadId = randomUUID();
 
-        const downloadId = randomUUID();
+    downloadCache.set(downloadId, {
+        status: "downloading",
+        progress: 0,
+        filePath: null,
+        expiresAt: Date.now() + 15 * 60 * 1000,
+    });
+
+    res.json({ status: "started", downloadId });
+
+    try {
+        const filePath = await downloadMedia(url, type, (progress) => {
+            const entry = downloadCache.get(downloadId);
+            if (entry) entry.progress = progress;
+        });
 
         downloadCache.set(downloadId, {
-            filePath,
-            expiresAt: Date.now() + 15 * 60 * 1000,
-        });
-        console.log("GUARDANDO CACHE:", downloadId, filePath);
-
-        res.json({
             status: "ready",
-            downloadUrl: `/api/download/file?id=${downloadId}`,
+            progress: 100,
+            filePath,
             filename: path.basename(filePath),
+            expiresAt: Date.now() + 15 * 60 * 1000,
         });
     } catch (error) {
         console.error("ERROR EN yt-dlp:", error.message);
-
-        res.status(500).json({
+        downloadCache.set(downloadId, {
+            status: "error",
             error: error.message,
+            expiresAt: Date.now() + 15 * 60 * 1000,
         });
     }
+});
+
+router.get("/progress", (req, res) => {
+    const { id } = req.query;
+    const entry = downloadCache.get(id);
+
+    if (!entry) {
+        return res.status(404).json({ error: "ID no encontrado o expirado." });
+    }
+
+    res.json({
+        status: entry.status,
+        progress: entry.progress,
+        downloadUrl:
+            entry.status === "ready" ? `/api/download/file?id=${id}` : null,
+        error: entry.error || null,
+    });
 });
 
 router.get("/file", async (req, res) => {

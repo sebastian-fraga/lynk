@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export function useDownloader() {
     const [loading, setLoading] = useState(false);
     const [statusText, setStatusText] = useState("");
+    const [progress, setProgress] = useState(0);
     const [error, setError] = useState<string | null>(null);
+    const intervalRef = useRef<number | null>(null);
+
+    function stopPolling() {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+    }
 
     async function download(type: "video" | "audio", url: string) {
         if (!url.trim()) return;
 
         setLoading(true);
+        setProgress(0);
         setStatusText(
             type === "video"
                 ? "Preparando video..."
@@ -24,10 +34,7 @@ export function useDownloader() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    url,
-                    type,
-                }),
+                body: JSON.stringify({ url, type }),
             });
 
             const data = await response.json();
@@ -38,27 +45,59 @@ export function useDownloader() {
                 );
             }
 
-            const fileResponse = await fetch(
-                `${API_URL}${data.downloadUrl}`
-            );
+            const { downloadId } = data;
 
-            if (!fileResponse.ok) {
-                throw new Error("Error descargando archivo.");
-            }
+            setStatusText("Descargando...");
 
-            const blob = await fileResponse.blob();
+            await new Promise<void>((resolve, reject) => {
+                intervalRef.current = window.setInterval(async () => {
+                    try {
+                        const progressRes = await fetch(
+                            `${API_URL}/api/download/progress?id=${downloadId}`,
+                        );
+                        const progressData = await progressRes.json();
 
-            const blobUrl = URL.createObjectURL(blob);
+                        if (progressData.status === "downloading") {
+                            setProgress(progressData.progress || 0);
+                        }
 
-            const link = document.createElement("a");
-            link.href = blobUrl;
-            link.download = data.filename || "download";
+                        if (progressData.status === "ready") {
+                            stopPolling();
+                            setProgress(100);
 
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+                            const fileResponse = await fetch(
+                                `${API_URL}${progressData.downloadUrl}`,
+                            );
 
-            URL.revokeObjectURL(blobUrl);
+                            if (!fileResponse.ok) {
+                                throw new Error("Error descargando archivo.");
+                            }
+
+                            const blob = await fileResponse.blob();
+                            const blobUrl = URL.createObjectURL(blob);
+
+                            const link = document.createElement("a");
+                            link.href = blobUrl;
+                            link.download = progressData.filename || "download";
+
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+
+                            URL.revokeObjectURL(blobUrl);
+                            resolve();
+                        }
+
+                        if (progressData.status === "error") {
+                            stopPolling();
+                            reject(new Error(progressData.error || "Error en la descarga."));
+                        }
+                    } catch (pollErr) {
+                        stopPolling();
+                        reject(pollErr);
+                    }
+                }, 1000);
+            });
         } catch (err) {
             if (err instanceof Error) {
                 setError(err.message);
@@ -66,6 +105,7 @@ export function useDownloader() {
                 setError("Error en la descarga.");
             }
         } finally {
+            stopPolling();
             setLoading(false);
             setStatusText("");
         }
@@ -75,6 +115,7 @@ export function useDownloader() {
         download,
         loading,
         statusText,
+        progress,
         error,
     };
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 import { useDownloader } from "../hooks/useDownloader";
 
@@ -24,6 +25,7 @@ export default function LinkInput() {
         download,
         loading,
         statusText,
+        progress,
         error: downloadError,
     } = useDownloader();
 
@@ -132,6 +134,16 @@ export default function LinkInput() {
                 <p className="text-green-300 text-sm font-medium animate-pulse text-center">
                     {statusText}
                 </p>
+            )}
+
+            {loading && (
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                    <motion.div
+                        className="bg-green-400 h-2 rounded-full"
+                        animate={{ width: `${progress}%` }}
+                        transition={{ ease: "easeOut", duration: 0.3 }}
+                    />
+                </div>
             )}
 
             {(error || downloadError) && (
