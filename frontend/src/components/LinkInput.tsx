@@ -125,15 +125,13 @@ export default function LinkInput({
 
             setVideoInfo(data);
 
-            console.log("data.platform:", data.platform);
-
             saveHistory({
                 id: crypto.randomUUID(),
                 url: currentUrl,
                 title: data.title,
                 channel: data.channel,
                 thumbnail: data.thumbnail,
-                platform: data.platform,
+                platform: detectPlatform(currentUrl),
                 createdAt: Date.now(),
             });
         } catch (err) {
