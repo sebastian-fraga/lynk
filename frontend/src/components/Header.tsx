@@ -2,6 +2,7 @@ import { Chip } from './ui/Chip';
 import { GithubIcon } from './icons/GithubIcon'
 
 import { IconHistory, IconMoon, IconLanguageHiragana } from '@tabler/icons-react';
+import { Tooltip } from './ui/Tooltip';
 
 
 function Header() {
@@ -13,13 +14,19 @@ function Header() {
                 </a>
             </div>
             <div className='flex items-center gap-5 text-white'>
-                <IconHistory />
-                <IconMoon />
+                <Tooltip label="Historial de links" position="bottom">
+                    <IconHistory />
+                </Tooltip>
+                <Tooltip label="Modo oscuro" position="bottom">
+                    <IconMoon />
+                </Tooltip>
                 <button className="appearance-none bg-transparent border-none p-0">
-                    <Chip
-                        icon={IconLanguageHiragana}
-                        text="Español"
-                    />
+                    <Tooltip label="Idioma" position="bottom">
+                        <Chip
+                            icon={IconLanguageHiragana}
+                            text="Español"
+                        />
+                    </Tooltip>
                 </button>
             </div>
         </header>
