@@ -122,9 +122,9 @@ export default function LinkInput() {
         <div className="flex flex-col items-center gap-3 w-full px-4">
             <form
                 onSubmit={handleSubmit}
-                className="flex items-center justify-center gap-2 w-full max-w-2xl text-black"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full max-w-2xl text-black"
             >
-                <div className="relative flex-1 w-xl min-w-0">
+                <div className="relative flex-1 min-w-0 w-full">
                     <motion.button
                         type="button"
                         onClick={handlePaste}
@@ -166,7 +166,7 @@ export default function LinkInput() {
                             setUrl(e.target.value);
                             if (error) setError(null);
                         }}
-                        className="bg-green-50 w-full h-12 pl-14 pr-4 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-green-400 transition-all"
+                        className="bg-green-50 w-full h-12 pl-14 pr-4 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm sm:text-base"
                         placeholder="Ejemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                     />
                 </div>
@@ -180,7 +180,7 @@ export default function LinkInput() {
                     whileHover={!loadingInfo && url.trim() ? { scale: 1.05 } : {}}
                     whileTap={!loadingInfo && url.trim() ? { scale: 0.95 } : {}}
                     transition={{ duration: 0.2 }}
-                    className="bg-green-400 hover:bg-green-500 disabled:cursor-not-allowed transition-colors px-4 sm:px-5 rounded-md text-black flex items-center justify-center h-12 shrink-0 hover:cursor-pointer"
+                    className="bg-green-400 hover:bg-green-500 disabled:cursor-not-allowed transition-colors px-4 rounded-md text-black flex items-center justify-center gap-2 h-12 shrink-0 hover:cursor-pointer"
                 >
                     <div className="overflow-hidden">
                         <AnimatePresence mode="wait" initial={false}>
@@ -270,7 +270,7 @@ export default function LinkInput() {
                         className="overflow-hidden"
                     >
                         <motion.div
-                            className="text-center text-sm bg-red-800/30 border border-red-600/20 text-red-200/90 px-5 py-2 rounded-xl flex items-center gap-2.5"
+                            className="text-center text-sm bg-red-800/30 border border-red-600/20 text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-center gap-2.5 max-w-full"
                             initial={{ y: -10, x: 0 }}
                             animate={{
                                 y: 0,
@@ -291,7 +291,7 @@ export default function LinkInput() {
                                 <IconX size={16} />
                             </motion.div>
 
-                            <p className="truncate max-w-prose">{error || downloadError}</p>
+                            <p className="truncate max-w-55 sm:max-w-prose">{error || downloadError}</p>
                         </motion.div>
                     </motion.div>
                 )}

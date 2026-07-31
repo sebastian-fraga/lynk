@@ -11,13 +11,13 @@ export default function SupportedPlatforms() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-            className="flex flex-col items-center gap-2 mt-24"
+            className="flex flex-col items-center gap-2 mt-16 sm:mt-24 px-4"
         >
             <h2 className="text-green-100/60 text-xs font-medium tracking-widest uppercase">
                 Plataformas soportadas
             </h2>
 
-            <div className="flex flex-wrap justify-center gap-3 hover:cursor-default">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 hover:cursor-default max-w-xl">
                 {platforms.map((platform, i) => {
                     const disabled = DISABLED_PLATFORMS.includes(platform.id);
 
