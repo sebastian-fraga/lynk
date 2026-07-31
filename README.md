@@ -1,8 +1,8 @@
-![Banner](https://lynk-plum.vercel.app/images/banner.png)
+![Banner](https://lynkdownloader.vercel.app/images/banner.png)
 
 # ⬇️ Lynk
 
-[![Deploy Status](https://img.shields.io/github/deployments/sebastian-fraga/lynk/production?label=Vercel&logo=vercel)](https://lynk.vercel.app)
+[![Deploy Status](https://img.shields.io/github/deployments/sebastian-fraga/lynk/production?label=Vercel&logo=vercel)](https://lynkdownloader.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -12,7 +12,7 @@
 
 ## 🚀 Live Demo
 
-👉 **[https://lynk-plum.vercel.app](https://lynk-plum.vercel.app)**
+👉 **[https://lynkdownloader.vercel.app](https://lynkdownloader.vercel.app)**
 
 ## ✨ Features
 
