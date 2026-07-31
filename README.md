@@ -1,75 +1,140 @@
-# React + TypeScript + Vite
+![Banner](https://TU_URL_DEL_BANNER)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ⬇️ Lynk
 
-Currently, two official plugins are available:
+[![Deploy Status](https://img.shields.io/github/deployments/sebastian-fraga/lynk/production?label=Vercel&logo=vercel)](https://lynk.vercel.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Lynk** is an open-source media downloader built with React, TypeScript and yt-dlp. Download videos, audio and images from multiple platforms through a fast and privacy-focused app.
 
-## React Compiler
+## 🚀 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 **[https://lynk-plum.vercel.app](https://lynk-plum.vercel.app)**
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📥 Download **videos**, **audio** and **images** from multiple platforms
+- ⚡ Fast media processing powered by `yt-dlp`
+- 🔗 Simple URL-based downloads - no account required
+- 📋 Paste links directly from your clipboard
+- 🎚️ Choose between available media formats
+- 🎨 Modern, responsive and user-friendly interface
+- 🌙 Dark and light themes
+- 🌍 Multi-language support
+- 🕒 Download history to easily access previous links
+- 🔒 Privacy-focused: no data stored permanently
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🌐 Supported Platforms
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Platform    | Video | Audio | Posts |
+| ----------- | :---: | :---: | :---: |
+| YouTube     |  ✅   |  ✅   |  ➖   |
+| Instagram   |  ✅   |  ✅   |  ⌛   |
+| Facebook    |  ⌛   |  ⌛   |  ⌛   |
+| X / Twitter |  ⌛   |  ⌛   |  ⌛   |
+| TikTok      |  ⌛   |  ⌛   |  ⌛   |
+| Reddit      |  ⌛   |  ⌛   |  ⌛   |
+| Pinterest   |  ⌛   |  ⌛   |  ⌛   |
+| Soundcloud  |  ➖   |  ⌛   |  ➖   |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 📖 Legend
 
+- ✅ Supported
+- ❌ Not supported
+- ➖ Not applicable
+- ⌛ Coming soon
+
+## 🗺️ Roadmap
+
+### 🎨 Interface
+
+- [x] Responsive design
+- [x] Dark mode
+- [ ] Light mode
+- [ ] Multiple language support
+
+### 🌐 Platforms
+
+- [x] YouTube support
+- [x] Instagram support
+- [ ] Facebook support
+- [ ] X / Twitter support
+- [ ] TikTok support
+- [ ] Reddit support
+- [ ] Pinterest support
+- [ ] Soundcloud support
+
+### ⚙️ Features
+
+- [x] Video downloads
+- [x] Audio extraction
+- [ ] Image downloads
+- [ ] Download quality selection
+- [ ] Download history improvements
+
+### 🚀 Backend
+
+- [x] yt-dlp integration
+- [x] Temporary file cleanup
+- [ ] Performance optimizations
+
+## 🛠️ Tech Stack
+
+**Frontend**
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Tabler Icons
+
+**Backend / Infrastructure**
+
+- Node.js
+- Express
+- yt-dlp
+- Railway
+- pnpm
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 20 or higher
+- [pnpm](https://pnpm.io/) (`npm install -g pnpm`)
+
+### Installation
+
+```bash
+git clone https://github.com/sebastian-fraga/lynk.git
+
+cd lynk/backend
+pnpm install
+
+cd ../frontend
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🤝 Contributing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Contributions, issues, and feature requests are welcome. Feel free to check the [issues page](https://github.com/sebastian-fraga/lynk/issues).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📄 License
 
-```
+This project is licensed under the MIT License — see the [LICENSE](LICENSE.md) file for details.
+
+## ☕ Support
+
+If you enjoy Lynk and want to support the project, consider buying me a coffee. Your support helps cover hosting costs and future improvements
+
+<a href="https://ko-fi.com/sebastianfraga">
+  <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi">
+</a>
+
+<a href="https://cafecito.app/sebastianfraga">
+  <img src="https://cdn.cafecito.app/imgs/buttons/button_1.png" alt="Support me on Cafecito">
+</a>
