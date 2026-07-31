@@ -15,8 +15,16 @@ export function Tooltip({ label, position = "top", children }: TooltipProps) {
     return (
         <div
             className="relative inline-flex"
-            onMouseEnter={() => setIsVisible(true)}
-            onMouseLeave={() => setIsVisible(false)}
+            onPointerEnter={(e) => {
+                if (e.pointerType === "mouse") {
+                    setIsVisible(true);
+                }
+            }}
+            onPointerLeave={(e) => {
+                if (e.pointerType === "mouse") {
+                    setIsVisible(false);
+                }
+            }}
         >
             {children}
 
