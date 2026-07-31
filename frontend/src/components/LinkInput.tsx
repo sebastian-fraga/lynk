@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useSpring, useMotionValueEvent, useTransform } from "framer-motion";
 
 import { useDownloader } from "../hooks/useDownloader";
 import { detectPlatform } from "../utils/detectPlatform";
+import { saveHistory } from "../utils/historyStorage";
 
 import VideoPreview from "./VideoPreview";
 import { Tooltip } from "./ui/Tooltip";
@@ -11,8 +12,18 @@ import { IconClipboard, IconCheck, IconLoader2, IconCornerDownLeft, IconX } from
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasPreview: boolean) => void }) {
+interface LinkInputProps {
+    onPreviewChange?: (hasPreview: boolean) => void;
+    historyUrl?: string;
+    onHistorySubmit?: () => void;
+}
+
+export default function LinkInput({
+    onPreviewChange,
+    historyUrl}: LinkInputProps) {
     const [url, setUrl] = useState("");
+    const currentUrl = url;
+
     const [loadingInfo, setLoadingInfo] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -34,6 +45,8 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
         progress,
         error: downloadError,
     } = useDownloader();
+
+    const formRef = useRef<HTMLFormElement>(null);
 
     const springProgress = useSpring(0, { stiffness: 60, damping: 20 });
     const [displayProgress, setDisplayProgress] = useState(0);
@@ -73,9 +86,9 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (!url.trim()) return;
+        if (!currentUrl.trim()) return;
 
-        const platform = detectPlatform(url);
+        const platform = detectPlatform(currentUrl);
 
         switch (platform) {
             case "invalid":
@@ -99,7 +112,7 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ url }),
+                body: JSON.stringify({ url: currentUrl }),
             });
 
             const data = await response.json();
@@ -111,6 +124,18 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
             }
 
             setVideoInfo(data);
+
+            console.log("data.platform:", data.platform);
+
+            saveHistory({
+                id: crypto.randomUUID(),
+                url: currentUrl,
+                title: data.title,
+                channel: data.channel,
+                thumbnail: data.thumbnail,
+                platform: data.platform,
+                createdAt: Date.now(),
+            });
         } catch (err) {
             if (err instanceof Error) {
                 setError(err.message);
@@ -122,9 +147,21 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
         }
     }
 
+    useEffect(() => {
+        if (historyUrl) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setUrl(historyUrl);
+
+            setTimeout(() => {
+                formRef.current?.requestSubmit();
+            }, 0);
+        }
+    }, [historyUrl]);
+
     return (
         <div className="flex flex-col items-center gap-3 w-full px-4">
             <form
+                ref={formRef}
                 onSubmit={handleSubmit}
                 className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full max-w-2xl text-black"
             >
@@ -165,7 +202,7 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
 
                     <input
                         type="text"
-                        value={url}
+                        value={currentUrl}
                         onChange={(e) => {
                             setUrl(e.target.value);
                             if (error) setError(null);
@@ -177,12 +214,12 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
 
                 <motion.button
                     type="submit"
-                    disabled={loadingInfo || !url.trim()}
+                    disabled={loadingInfo || !currentUrl.trim()}
                     animate={{
-                        opacity: loadingInfo || !url.trim() ? 0.5 : 1,
+                        opacity: loadingInfo || !currentUrl.trim() ? 0.5 : 1,
                     }}
-                    whileHover={!loadingInfo && url.trim() ? { scale: 1.05 } : {}}
-                    whileTap={!loadingInfo && url.trim() ? { scale: 0.95 } : {}}
+                    whileHover={!loadingInfo && currentUrl.trim() ? { scale: 1.05 } : {}}
+                    whileTap={!loadingInfo && currentUrl.trim() ? { scale: 0.95 } : {}}
                     transition={{ duration: 0.2 }}
                     className="bg-green-400 hover:bg-green-500 disabled:cursor-not-allowed transition-colors px-4 rounded-md text-black flex items-center justify-center gap-2 h-12 shrink-0 hover:cursor-pointer"
                 >
@@ -227,7 +264,7 @@ export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasP
                         <VideoPreview
                             videoInfo={videoInfo}
                             loading={loading}
-                            onDownload={(type) => download(type, url)}
+                            onDownload={(type) => download(type, currentUrl)}
                         />
                     </motion.div>
                 )}

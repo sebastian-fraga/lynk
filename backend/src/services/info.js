@@ -23,6 +23,6 @@ export async function getVideoInfo(url) {
         title: data.title,
         channel: data.channel || data.uploader,
         thumbnail: data.thumbnail,
-        platform: data.extractor_key,
+        platform: data.extractor,
     };
 }
