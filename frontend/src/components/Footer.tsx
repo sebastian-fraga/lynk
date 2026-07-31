@@ -1,13 +1,6 @@
 function Footer() {
     return (
-        <footer className="
-            flex 
-            flex-col 
-            items-center 
-            gap-3 
-            py-6
-            text-emerald-200/40
-        ">
+        <footer className="flex flex-col items-center gap-3 py-6 text-emerald-200/40">
 
             <div className="flex gap-4 text-xs">
                 <a
