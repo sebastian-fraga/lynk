@@ -1,4 +1,4 @@
-![Banner](https://TU_URL_DEL_BANNER)
+![Banner](https://lynk-plum.vercel.app/images/banner.png)
 
 # ⬇️ Lynk
 
