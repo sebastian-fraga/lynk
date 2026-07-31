@@ -73,7 +73,7 @@
 - [x] Audio extraction
 - [ ] Image downloads
 - [ ] Download quality selection
-- [ ] Download history improvements
+- [x] Download history improvements
 
 ### 🚀 Backend
 
