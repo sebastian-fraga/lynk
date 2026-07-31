@@ -3,7 +3,7 @@ import { Tooltip } from "./ui/Tooltip";
 import { platforms } from "../data/platforms";
 import { Chip } from "./ui/Chip";
 
-const DISABLED_PLATFORMS = ["tiktok"];
+const DISABLED_PLATFORMS = ["facebook", "x", "tiktok", "reddit", "pinterest", "soundcloud"];
 
 export default function SupportedPlatforms() {
     return (
@@ -17,7 +17,7 @@ export default function SupportedPlatforms() {
                 Plataformas soportadas
             </h2>
 
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 hover:cursor-default max-w-xl">
+            <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
                 {platforms.map((platform, i) => {
                     const disabled = DISABLED_PLATFORMS.includes(platform.id);
 
