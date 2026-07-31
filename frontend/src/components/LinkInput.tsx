@@ -270,7 +270,7 @@ export default function LinkInput() {
                         className="overflow-hidden"
                     >
                         <motion.div
-                            className="text-center text-sm bg-red-800/30 border border-red-600/20 text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-center gap-2.5 max-w-full"
+                            className="bg-red-800/30 border border-red-600/20 text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-start gap-2.5 w-full max-w-xl"
                             initial={{ y: -10, x: 0 }}
                             animate={{
                                 y: 0,
@@ -291,7 +291,9 @@ export default function LinkInput() {
                                 <IconX size={16} />
                             </motion.div>
 
-                            <p className="truncate max-w-55 sm:max-w-prose">{error || downloadError}</p>
+                            <p className="flex-1 min-w-0 text-sm leading-5 wrap-break-word">
+                                {error || downloadError}
+                            </p>
                         </motion.div>
                     </motion.div>
                 )}
