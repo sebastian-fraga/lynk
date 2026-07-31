@@ -39,7 +39,7 @@ function Footer() {
             </div>
 
             <p className="text-xs">
-                © {new Date().getFullYear()} Lynk
+                © {new Date().getFullYear()} Lynk - <span className="font-semibold"> hecho con ❤️ por Sebastián Fraga</span>
             </p>
         </footer>
     )
