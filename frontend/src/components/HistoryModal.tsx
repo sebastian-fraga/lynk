@@ -85,7 +85,7 @@ export default function HistoryModal({
                                             className="w-20 h-14 object-cover rounded-md shrink-0"
                                         />
 
-                                        <div className="absolute top-1 left-1 bg-black/70 rounded-full p-1">
+                                        <div className="absolute top-1 left-1 bg-red-700/70 rounded-full p-12">
                                             <PlatformIcon platform={item.platform} />
                                         </div>
 

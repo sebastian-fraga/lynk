@@ -19,6 +19,11 @@ export async function getVideoInfo(url) {
 
     const data = JSON.parse(stdout);
 
+    console.log("YT-DLP DATA:", {
+        extractor: data.extractor,
+        extractor_key: data.extractor_key,
+    });
+
     return {
         title: data.title,
         channel: data.channel || data.uploader,
