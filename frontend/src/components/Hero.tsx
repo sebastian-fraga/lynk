@@ -1,9 +1,14 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+
+import { motion, AnimatePresence } from "framer-motion";
+
 import { IconShieldCheckFilled } from "@tabler/icons-react";
 
 import LinkInput from "./LinkInput";
 
 function Hero() {
+    const [hasPreview, setHasPreview] = useState(false);
+
     return (
         <section className="flex flex-col gap-8 sm:gap-12 px-4 w-full max-w-3xl mx-auto">
             <div className="flex flex-col items-center gap-2 text-center">
@@ -41,20 +46,26 @@ function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
             >
-                <LinkInput />
+                <LinkInput onPreviewChange={setHasPreview} />
             </motion.div>
 
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="flex items-start sm:items-center justify-center gap-2 text-center text-sm sm:text-base max-w-xl mx-auto"
-            >
-                <IconShieldCheckFilled className="shrink-0 mt-0.5 sm:mt-0 text-green-300" />
-                <p className="font-extralight text-gray-100">
-                    Tus archivos descargados no se almacenan en nuestros servidores
-                </p>
-            </motion.div>
+            <AnimatePresence>
+                {!hasPreview && (
+                    <motion.div
+                        key="shield-text"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="flex items-start sm:items-center justify-center gap-2 text-center text-sm sm:text-base max-w-xl mx-auto overflow-hidden"
+                    >
+                        <IconShieldCheckFilled className="shrink-0 mt-0.5 sm:mt-0 text-green-300" />
+                        <p className="font-extralight text-gray-100">
+                            Tus archivos descargados no se almacenan en nuestros servidores
+                        </p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }

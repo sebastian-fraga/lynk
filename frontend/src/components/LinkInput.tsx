@@ -11,7 +11,7 @@ import { IconClipboard, IconCheck, IconLoader2, IconCornerDownLeft, IconX } from
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export default function LinkInput() {
+export default function LinkInput({ onPreviewChange }: { onPreviewChange?: (hasPreview: boolean) => void }) {
     const [url, setUrl] = useState("");
     const [loadingInfo, setLoadingInfo] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -22,6 +22,10 @@ export default function LinkInput() {
         thumbnail: string;
         platform: string;
     } | null>(null);
+
+    useEffect(() => {
+        onPreviewChange?.(!!videoInfo);
+    }, [videoInfo, onPreviewChange]);
 
     const {
         download,
