@@ -2,10 +2,12 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import downloadRouter from "./routes/download.js";
-import infoRouter from "./routes/info.js"
+import infoRouter from "./routes/info.js";
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 
-const cookiesPath = "/tmp/cookies.txt";
+const cookiesPath = path.join(os.tmpdir(), "cookies.txt");
 
 if (process.env.YTDLP_COOKIES_B64) {
     fs.writeFileSync(cookiesPath, Buffer.from(process.env.YTDLP_COOKIES_B64, "base64"));

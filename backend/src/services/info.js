@@ -1,9 +1,11 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import os from "node:os";
+import path from "node:path";
 
 const execFileAsync = promisify(execFile);
 
-const COOKIES_PATH = "/tmp/cookies.txt";
+const COOKIES_PATH = path.join(os.tmpdir(), "cookies.txt");
 
 export async function getVideoInfo(url) {
     const { stdout } = await execFileAsync("yt-dlp", [

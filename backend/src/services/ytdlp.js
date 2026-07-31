@@ -1,8 +1,10 @@
 import { spawn } from "node:child_process";
 import path from "node:path";
+import os from "node:os";
+import { mapYtDlpError } from "./downloader/mapYtDlpError.js";
 
 const DOWNLOAD_DIR = path.resolve("downloads");
-const COOKIES_PATH = "/tmp/cookies.txt";
+const COOKIES_PATH = path.join(os.tmpdir(), "cookies.txt");
 
 export function downloadMedia(url, type = "video", onProgress) {
     return new Promise((resolve, reject) => {
@@ -51,9 +53,8 @@ export function downloadMedia(url, type = "video", onProgress) {
 
         proc.on("close", (code) => {
             if (code !== 0) {
-                return reject(
-                    new Error(stderr || `yt-dlp salió con código ${code}`),
-                );
+                console.error("yt-dlp stderr crudo:", stderr);
+                return reject(new Error(mapYtDlpError(stderr)));
             }
             resolve(filePath);
         });
@@ -85,7 +86,8 @@ export function getVideoInfo(url) {
 
         proc.on("close", (code) => {
             if (code !== 0) {
-                return reject(new Error(error));
+                console.error("yt-dlp stderr crudo:", error);
+                return reject(new Error(mapYtDlpError(error)));
             }
 
             try {
@@ -97,7 +99,9 @@ export function getVideoInfo(url) {
                     channel: data.uploader,
                 });
             } catch {
-                reject(new Error("No se pudo procesar la información."));
+                reject(
+                    new Error("No se pudo procesar la información del video."),
+                );
             }
         });
     });

@@ -1,7 +1,4 @@
-import {
-    getVideoInfo,
-    downloadMedia as downloadWithYtDlp,
-} from "../ytdlp.js";
+import { getVideoInfo, downloadMedia as downloadWithYtDlp } from "../ytdlp.js";
 
 export function getInstagramInfo(url) {
     return getVideoInfo(url);

@@ -1,4 +1,4 @@
-import { getVideoInfo, downloadMedia as downloadWithYtDlp } from "../ytdlp.js";
+import { getVideoInfo, downloadMedia as downloadWithYtDlp } from "../ytdlp.js"
 
 export function getYoutubeInfo(url) {
     return getVideoInfo(url);

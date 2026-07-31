@@ -1,8 +1,9 @@
 import { randomUUID } from "crypto";
 import { Router } from "express";
 import path from "node:path";
-import { downloadMedia } from "../services/downloader/index.js";
 import fs from "node:fs";
+
+import { downloadMedia } from "../services/downloader/index.js";
 
 const router = Router();
 
@@ -62,6 +63,7 @@ router.post("/", async (req, res) => {
         });
     } catch (error) {
         console.error("ERROR EN yt-dlp:", error.message);
+
         downloadCache.set(downloadId, {
             status: "error",
             error: error.message,
@@ -91,12 +93,9 @@ router.get("/progress", (req, res) => {
 router.get("/file", async (req, res) => {
     const { id } = req.query;
 
-    console.log("BUSCANDO CACHE:", id);
-    console.log(downloadCache);
-
     if (!id || !downloadCache.has(id)) {
         return res.status(400).json({
-            error: "ID de descarga inválida o expirada.",
+            error: "El link de descarga expiró o no es válido. Volvé a intentar desde el inicio.",
         });
     }
 
@@ -105,7 +104,7 @@ router.get("/file", async (req, res) => {
     try {
         if (!fs.existsSync(filePath)) {
             return res.status(404).json({
-                error: "El archivo ya no existe.",
+                error: "El archivo ya no está disponible. Volvé a intentar la descarga.",
             });
         }
 
@@ -127,7 +126,7 @@ router.get("/file", async (req, res) => {
         console.error("ERROR ENVIANDO ARCHIVO:", error.message);
 
         res.status(500).json({
-            error: "Error enviando archivo.",
+            error: "Ocurrió un error al enviar el archivo. Intentá nuevamente.",
         });
     }
 });
