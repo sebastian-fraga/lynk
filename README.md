@@ -111,11 +111,7 @@
 
 ```bash
 git clone https://github.com/sebastian-fraga/lynk.git
-
-cd lynk/backend
-pnpm install
-
-cd ../frontend
+cd lynk
 pnpm install
 ```
 
