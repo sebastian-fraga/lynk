@@ -3,7 +3,11 @@ import { detectPlatform } from "./detectPlatform.js";
 import { getYoutubeInfo, downloadYoutube } from "./youtube.js";
 import { getInstagramInfo, downloadInstagram } from "./instagram.js";
 
-export async function getMediaInfo(url) {
+type DownloadType = "video" | "audio";
+
+type ProgressCallback = (progress: number) => void;
+
+export async function getMediaInfo(url: string) {
     const platform = detectPlatform(url);
 
     if (platform === "invalid") {
@@ -20,10 +24,17 @@ export async function getMediaInfo(url) {
 
         case "instagram":
             return getInstagramInfo(url);
+
+        default:
+            throw new Error("Plataforma no soportada.");
     }
 }
 
-export async function downloadMedia(url, type, onProgress) {
+export async function downloadMedia(
+    url: string,
+    type: DownloadType,
+    onProgress?: ProgressCallback
+): Promise<string> {
     const platform = detectPlatform(url);
 
     if (platform === "invalid") {
@@ -40,5 +51,8 @@ export async function downloadMedia(url, type, onProgress) {
 
         case "instagram":
             return downloadInstagram(url, type, onProgress);
+
+        default:
+            throw new Error("Plataforma no soportada.");
     }
 }

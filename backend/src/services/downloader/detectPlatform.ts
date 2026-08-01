@@ -1,6 +1,6 @@
 import { platforms } from "../config/platforms.js";
 
-export function detectPlatform(url) {
+export function detectPlatform(url: string) {
     try {
         const hostname = new URL(url).hostname.toLowerCase();
 

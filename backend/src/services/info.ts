@@ -7,7 +7,7 @@ const execFileAsync = promisify(execFile);
 
 const COOKIES_PATH = path.join(os.tmpdir(), "cookies.txt");
 
-export async function getVideoInfo(url) {
+export async function getVideoInfo(url: string) {
     const { stdout } = await execFileAsync("yt-dlp", [
         "--no-playlist",
         "--cookies",

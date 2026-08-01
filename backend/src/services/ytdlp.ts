@@ -3,11 +3,25 @@ import path from "node:path";
 import os from "node:os";
 import { mapYtDlpError } from "./downloader/mapYtDlpError.js";
 
+type DownloadType = "video" | "audio";
+
+type ProgressCallback = (progress: number) => void;
+
+export interface VideoInfo {
+    title: string;
+    thumbnail: string;
+    channel: string;
+}
+
 const DOWNLOAD_DIR = path.resolve("downloads");
 const COOKIES_PATH = path.join(os.tmpdir(), "cookies.txt");
 
-export function downloadMedia(url, type = "video", onProgress) {
-    return new Promise((resolve, reject) => {
+export function downloadMedia(
+    url: string,
+    type: DownloadType = "video",
+    onProgress?: ProgressCallback
+): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
         const args = [
             "--restrict-filenames",
             "--no-playlist",
@@ -61,8 +75,8 @@ export function downloadMedia(url, type = "video", onProgress) {
     });
 }
 
-export function getVideoInfo(url) {
-    return new Promise((resolve, reject) => {
+export function getVideoInfo(url: string): Promise<VideoInfo> {
+    return new Promise<VideoInfo>((resolve, reject) => {
         const args = [
             "--dump-json",
             "--no-playlist",

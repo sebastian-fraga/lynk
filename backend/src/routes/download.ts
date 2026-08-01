@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
     res.json({ status: "started", downloadId });
 
     try {
-        const filePath = await downloadMedia(url, type, (progress) => {
+        const filePath = await downloadMedia(url, type, (progress: number) => {
             const entry = downloadCache.get(downloadId);
             if (entry) entry.progress = progress;
         });
@@ -62,11 +62,13 @@ router.post("/", async (req, res) => {
             expiresAt: Date.now() + 15 * 60 * 1000,
         });
     } catch (error) {
-        console.error("ERROR EN yt-dlp:", error.message);
+        const message = error instanceof Error ? error.message : "Error desconocido";
+
+        console.error("ERROR EN yt-dlp:", message);
 
         downloadCache.set(downloadId, {
             status: "error",
-            error: error.message,
+            error: message,
             expiresAt: Date.now() + 15 * 60 * 1000,
         });
     }
@@ -123,7 +125,9 @@ router.get("/file", async (req, res) => {
             });
         });
     } catch (error) {
-        console.error("ERROR ENVIANDO ARCHIVO:", error.message);
+        const message = error instanceof Error ? error.message : "Error desconocido";
+
+        console.error("ERROR ENVIANDO ARCHIVO:", message);
 
         res.status(500).json({
             error: "Ocurrió un error al enviar el archivo. Intentá nuevamente.",

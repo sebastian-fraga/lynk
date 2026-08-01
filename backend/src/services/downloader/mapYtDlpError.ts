@@ -116,7 +116,7 @@ const ERROR_PATTERNS = [
     },
 ];
 
-export function mapYtDlpError(rawMessage) {
+export function mapYtDlpError(rawMessage: string): string {
     if (!rawMessage) {
         return "Ocurrió un error inesperado al procesar el contenido.";
     }

@@ -17,10 +17,12 @@ router.post("/", async (req, res) => {
 
         res.json(info);
     } catch (error) {
-        console.error("ERROR OBTENIENDO INFO:", error.message);
+        const message = error instanceof Error ? error.message : "Error desconocido";
+
+        console.error("ERROR OBTENIENDO INFO:", message);
 
         res.status(500).json({
-            error: error.message,
+            error: message,
         });
     }
 });
