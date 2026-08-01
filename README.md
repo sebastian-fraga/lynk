@@ -5,8 +5,8 @@
 [![Deploy Status](https://img.shields.io/github/deployments/sebastian-fraga/lynk/production?label=Vercel&logo=vercel)](https://lynkdownloader.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev)
 
 **Lynk** is an open-source media downloader built with React, TypeScript and yt-dlp. Download videos, audio and images from multiple platforms through a fast and privacy-focused app.
 
@@ -73,7 +73,7 @@
 - [x] Audio extraction
 - [ ] Image downloads
 - [ ] Download quality selection
-- [ ] Download history improvements
+- [x] Download history improvements
 
 ### 🚀 Backend
 
@@ -85,7 +85,7 @@
 
 **Frontend**
 
-- React 19
+- React
 - TypeScript
 - Vite
 - Tailwind CSS
