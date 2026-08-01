@@ -26,6 +26,7 @@ export default function SupportedPlatforms() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: 0.6 + i * 0.08, ease: "backOut" }}
+                            className="hover:cursor-default"
                         >
                             <Chip
                                 icon={platform.icon}
