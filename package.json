@@ -1,0 +1,10 @@
+{
+    "name": "lynk",
+    "private": true,
+    "scripts": {
+        "dev": "pnpm --parallel --filter @lynk/frontend --filter @lynk/backend dev",
+        "build": "pnpm -r build",
+        "lint": "pnpm -r lint",
+        "start": "pnpm --filter @lynk/backend start"
+    }
+}
