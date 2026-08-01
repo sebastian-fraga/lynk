@@ -2,6 +2,7 @@ import { detectPlatform } from "./detectPlatform.js";
 
 import { getYoutubeInfo, downloadYoutube } from "./youtube.js";
 import { getInstagramInfo, downloadInstagram } from "./instagram.js";
+import { getFacebookInfo, downloadFacebook } from "./facebook.js";
 
 type DownloadType = "video" | "audio";
 
@@ -24,6 +25,9 @@ export async function getMediaInfo(url: string) {
 
         case "instagram":
             return getInstagramInfo(url);
+
+        case "facebook":
+            return getFacebookInfo(url);
 
         default:
             throw new Error("Plataforma no soportada.");
@@ -51,6 +55,9 @@ export async function downloadMedia(
 
         case "instagram":
             return downloadInstagram(url, type, onProgress);
+
+        case "facebook":
+            return downloadFacebook(url, type, onProgress);
 
         default:
             throw new Error("Plataforma no soportada.");

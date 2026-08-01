@@ -8,6 +8,10 @@ export const platforms = [
         hosts: ["instagram.com"],
     },
     {
+        id: "facebook",
+        hosts: ["facebook.com"],
+    },
+    {
         id: "tiktok",
         hosts: ["tiktok.com"],
     },

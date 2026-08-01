@@ -3,7 +3,7 @@ import { Tooltip } from "./ui/Tooltip";
 import { platforms } from "../data/platforms";
 import { Chip } from "./ui/Chip";
 
-const DISABLED_PLATFORMS = ["facebook", "x", "tiktok", "reddit", "pinterest", "soundcloud"];
+const DISABLED_PLATFORMS = ["x", "tiktok", "reddit", "pinterest", "soundcloud"];
 
 export default function SupportedPlatforms() {
     return (

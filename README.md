@@ -33,7 +33,7 @@
 | ----------- | :---: | :---: | :---: |
 | YouTube     |  ✅   |  ✅   |  ➖   |
 | Instagram   |  ✅   |  ✅   |  ⌛   |
-| Facebook    |  ⌛   |  ⌛   |  ⌛   |
+| Facebook    |  ✅   |  ✅   |  ⌛   |
 | X / Twitter |  ⌛   |  ⌛   |  ⌛   |
 | TikTok      |  ⌛   |  ⌛   |  ⌛   |
 | Reddit      |  ⌛   |  ⌛   |  ⌛   |
@@ -60,7 +60,7 @@
 
 - [x] YouTube support
 - [x] Instagram support
-- [ ] Facebook support
+- [x] Facebook support
 - [ ] X / Twitter support
 - [ ] TikTok support
 - [ ] Reddit support
