@@ -26,11 +26,11 @@ function Hero({ historyUrl }: HeroProps) {
                         initial={{ rotate: -15, scale: 0.8 }}
                         animate={{ rotate: 0, scale: 1 }}
                         transition={{ duration: 0.5, ease: "backOut" }}
-                        className="rounded-md w-8 h-8 sm:w-10 sm:h-10"
+                        className="rounded-md w-8 h-8 sm:w-10 sm:h-10 shadow-lg dark:shadow-green-700/30 shadow-black/20"
                         src="/images/logo.webp"
                         alt="Logo de Lynk"
                     />
-                    <h1 className="text-6xl sm:text-7xl text-green-400 font-bold">
+                    <h1 className="text-6xl sm:text-7xl dark:text-green-400 text-green-600 font-bold">
                         LYNK
                     </h1>
                 </motion.div>
