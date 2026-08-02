@@ -309,7 +309,7 @@ export default function LinkInput({
                         className="overflow-hidden"
                     >
                         <motion.div
-                            className="bg-red-800/30 border border-red-600/20 text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-center gap-2.5 w-full max-w-xl"
+                            className="dark:bg-red-800/30 bg-red-600/90 border dark:border-red-600/20 border-red-700 text-red-100 dark:text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-center gap-2.5 w-full max-w-xl"
                             initial={{ y: -10, x: 0 }}
                             animate={{
                                 y: 0,
@@ -325,7 +325,7 @@ export default function LinkInput({
                                 initial={{ scale: 0, rotate: -180 }}
                                 animate={{ scale: 1, rotate: 0 }}
                                 transition={{ duration: 0.3, delay: 0.15, ease: "backOut" }}
-                                className="bg-red-800 rounded-full p-0.5 shrink-0"
+                                className="bg-red-800 dark:bg-red-800 rounded-full p-0.5 shrink-0"
                             >
                                 <IconX size={16} />
                             </motion.div>
