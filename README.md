@@ -53,7 +53,7 @@
 
 - [x] Responsive design
 - [x] Dark mode
-- [ ] Light mode
+- [x] Light mode
 - [ ] Multiple language support
 
 ### 🌐 Platforms

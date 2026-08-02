@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+
+import { IconPlus } from "@tabler/icons-react";
+
 import { Tooltip } from "./ui/Tooltip";
 import { platforms } from "../data/platforms";
 import { Chip } from "./ui/Chip";
@@ -13,7 +16,7 @@ export default function SupportedPlatforms() {
             transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
             className="flex flex-col items-center gap-2 mt-16 sm:mt-24 px-4"
         >
-            <h2 className="text-green-100/60 text-xs font-medium tracking-widest uppercase">
+            <h2 className="dark:text-green-100/60 text-green-800/90 text-xs font-medium tracking-widest uppercase">
                 Plataformas soportadas
             </h2>
 
@@ -44,6 +47,26 @@ export default function SupportedPlatforms() {
                         </Tooltip>
                     );
                 })}
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                        duration: 0.3,
+                        delay: 0.6 + platforms.length * 0.08,
+                        ease: "backOut",
+                    }}
+                >
+                    <Chip
+                        icon={IconPlus}
+                        text="Sugerir plataforma"
+                        variant="outline"
+                        isClickable
+                        onClick={() => {
+                            window.location.href = "mailto:fragasebastian1@gmail.com?subject=Sugerencia de plataforma en Lynk";
+                        }}
+                    />
+                </motion.div>
             </div>
         </motion.div>
     );

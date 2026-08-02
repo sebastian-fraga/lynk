@@ -72,7 +72,7 @@ export default function HistoryModal({
                     />
 
                     <motion.div
-                        className="fixed right-0 top-0 h-full w-full max-w-md bg-zinc-900/50 backdrop-blur-xl text-white z-50 p-6 shadow-xl rounded-l-2xl flex flex-col"
+                        className="fixed right-0 top-0 h-full w-full max-w-md bg-white/70 dark:bg-zinc-900/50 backdrop-blur-xl text-black dark:text-white z-50 p-6 shadow-xl rounded-l-2xl flex flex-col border-l border-gray-200 dark:border-transparent"
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
@@ -81,7 +81,7 @@ export default function HistoryModal({
                         <div className="flex items-center justify-start gap-4 shrink-0">
                             <button
                                 onClick={onClose}
-                                className="text-white/60 hover:text-white transition cursor-pointer"
+                                className="text-black/50 hover:text-black dark:text-white/60 dark:hover:text-white transition cursor-pointer"
                             >
                                 <IconX />
                             </button>
@@ -104,7 +104,7 @@ export default function HistoryModal({
                                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors w-fit cursor-pointer border
                                             ${confirmingClear
                                                 ? "text-white bg-red-500/90 border-red-500 hover:bg-red-500"
-                                                : "text-red-400 hover:text-red-300 hover:bg-red-500/10 border-red-500/20"
+                                                : "text-red-600 hover:text-red-500 hover:bg-red-500/10 border-red-500/30 dark:text-red-400 dark:hover:text-red-300 dark:border-red-500/20"
                                             }`}
                                     >
                                         <IconTrash className="w-4 h-4" />
@@ -122,9 +122,9 @@ export default function HistoryModal({
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
-                                        className="absolute inset-0 m-auto w-fit h-fit flex flex-col items-center justify-center gap-2 text-white/50 text-sm pointer-events-none"
+                                        className="absolute inset-0 m-auto w-fit h-fit flex flex-col items-center justify-center gap-2 text-black/50 dark:text-white/50 text-sm pointer-events-none"
                                     >
-                                        <IconMoodPuzzled className="w-10 h-10 stroke-[1.5] text-white/30" />
+                                        <IconMoodPuzzled className="w-10 h-10 stroke-[1.5] text-black/30 dark:text-white/30" />
                                         <p>No hay búsquedas todavía.</p>
                                     </motion.div>
                                 ) : (
@@ -150,7 +150,7 @@ export default function HistoryModal({
                                                         onHistorySelect(item.url);
                                                         onClose();
                                                     }}
-                                                    className="flex gap-3 text-left bg-slate-950/20 hover:bg-white/10 py-2 px-3 rounded-lg transition overflow-hidden w-full cursor-pointer"
+                                                    className="flex gap-3 text-left bg-black/5 hover:bg-black/10 dark:bg-slate-950/20 dark:hover:bg-white/10 py-2 pl-3 pr-1.5 rounded-lg transition w-full cursor-pointer"
                                                 >
                                                     <img
                                                         src={item.thumbnail}
@@ -159,17 +159,16 @@ export default function HistoryModal({
                                                     />
 
                                                     <div className="min-w-0 flex-1">
-                                                        <div className="flex gap-2 relative">
-                                                            <div className="shrink-0 mt-0.5 absolute right-0">
+                                                        <div className="relative">
+                                                            <div className="shrink-0 mt-0.5 absolute top-0 right-0">
                                                                 <PlatformIcon platform={item.platform} />
                                                             </div>
 
-                                                            <p className="text-sm font-medium line-clamp-2">
+                                                            <p className="text-sm font-medium line-clamp-2 pr-6">
                                                                 {item.title}
                                                             </p>
                                                         </div>
-
-                                                        <span className="text-xs text-white/50">
+                                                        <span className="text-xs text-black/50 dark:text-white/50">
                                                             {item.channel}
                                                         </span>
                                                     </div>

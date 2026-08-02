@@ -205,7 +205,7 @@ export default function LinkInput({
                             setUrl(e.target.value);
                             if (error) setError(null);
                         }}
-                        className="bg-green-50 w-full h-12 pl-14 pr-4 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm sm:text-base"
+                        className="bg-white border border-green-200 dark:bg-green-50 shadow-xl dark:shadow-none w-full h-12 pl-14 pr-4 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-green-400 transition-all text-sm sm:text-base"
                         placeholder="Ejemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                     />
                 </div>

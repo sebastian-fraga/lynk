@@ -17,7 +17,11 @@ function App() {
       <div
         className="absolute inset-0 z-0"
         style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 197, 94, 0.25), transparent 70%), #000000",
+          background: `
+            radial-gradient(ellipse 60% 50% at 15% 10%, var(--bg-glow-secondary), transparent 70%),
+            radial-gradient(ellipse 80% 60% at 50% 0%, var(--bg-glow), transparent 70%),
+            var(--bg-base)
+        `,
         }}
       />
       <div className="relative z-10 flex min-h-screen flex-col">

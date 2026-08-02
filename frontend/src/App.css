@@ -1,6 +1,34 @@
 @import "tailwindcss";
 @import '@fontsource-variable/plus-jakarta-sans/wght.css';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-base: #f8faf9;
+  --bg-glow: rgba(34, 197, 94, 0.45);
+  --bg-glow-secondary: rgba(16, 185, 129, 0.18);
+}
+
+.dark {
+  --bg-base: #000000;
+  --bg-glow: rgba(34, 197, 94, 0.25);
+  --bg-glow-secondary: rgba(16, 185, 129, 0.12);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
 body {
   font-family: 'Plus Jakarta Sans Variable', sans-serif;
 }

@@ -19,7 +19,7 @@ export default function VideoPreview({
     onDownload,
 }: VideoPreviewProps) {
     return (
-        <div className="w-full max-w-2xl bg-zinc-900 rounded-lg p-3 sm:p-4 flex flex-col gap-6 sm:gap-8 mt-2">
+        <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 shadow-lg dark:shadow-none border border-gray-200 dark:border-transparent rounded-lg p-3 sm:p-4 flex flex-col gap-6 sm:gap-8 mt-2">
             <div className="flex gap-3 sm:gap-4 min-w-0">
                 <img
                     src={videoInfo.thumbnail}
@@ -28,11 +28,11 @@ export default function VideoPreview({
                 />
 
                 <div className="min-w-0">
-                    <h3 className="text-white font-medium line-clamp-2">
+                    <h3 className="text-black dark:text-white font-medium line-clamp-2">
                         {videoInfo.title}
                     </h3>
 
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">
                         {videoInfo.channel}
                     </p>
                 </div>
@@ -51,7 +51,7 @@ export default function VideoPreview({
                 <button
                     onClick={() => onDownload("audio")}
                     disabled={loading}
-                    className="flex-1 text-white bg-black hover:bg-gray-950 rounded-md py-2 flex items-center justify-center gap-2 transition-colors cursor-pointer text-sm sm:text-base"
+                    className="flex-1 text-black bg-white border border-gray-300 hover:bg-gray-100 dark:text-white dark:bg-black dark:border-transparent dark:hover:bg-gray-950 rounded-md py-2 flex items-center justify-center gap-2 transition-colors cursor-pointer text-sm sm:text-base"
                 >
                     <IconMusic size={20} />
                     Extraer audio
