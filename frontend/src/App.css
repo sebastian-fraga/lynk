@@ -4,12 +4,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  color-scheme: light;
   --bg-base: #f8faf9;
   --bg-glow: rgba(34, 197, 94, 0.45);
   --bg-glow-secondary: rgba(16, 185, 129, 0.18);
 }
 
 .dark {
+  color-scheme: dark;
   --bg-base: #000000;
   --bg-glow: rgba(34, 197, 94, 0.25);
   --bg-glow-secondary: rgba(16, 185, 129, 0.12);
