@@ -5,16 +5,19 @@
 
 :root {
   color-scheme: light;
-  --bg-base: #f8faf9;
-  --bg-glow: rgba(34, 197, 94, 0.45);
-  --bg-glow-secondary: rgba(16, 185, 129, 0.18);
+  --background:
+    radial-gradient(125% 125% at 50% 90%,
+      #ffffff 40%,
+      #10b981 100%);
 }
 
 .dark {
   color-scheme: dark;
-  --bg-base: #000000;
-  --bg-glow: rgba(34, 197, 94, 0.25);
-  --bg-glow-secondary: rgba(16, 185, 129, 0.12);
+  --background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,
+      rgba(34, 197, 94, 0.25),
+      transparent 70%),
+    #000000;
 }
 
 ::view-transition-old(root),

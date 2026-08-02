@@ -157,7 +157,7 @@ export default function LinkInput({
     }, [historyUrl]);
 
     return (
-        <div className="flex flex-col items-center gap-3 w-full px-4">
+        <div className="flex flex-col sm:items-center items-stretch gap-3 w-full px-4">
             <form
                 ref={formRef}
                 onSubmit={handleSubmit}
@@ -309,7 +309,7 @@ export default function LinkInput({
                         className="overflow-hidden"
                     >
                         <motion.div
-                            className="bg-red-800/30 border border-red-600/20 text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-start gap-2.5 w-full max-w-xl"
+                            className="bg-red-800/30 border border-red-600/20 text-red-200/90 px-3 sm:px-5 py-2 rounded-xl flex items-center gap-2.5 w-full max-w-xl"
                             initial={{ y: -10, x: 0 }}
                             animate={{
                                 y: 0,
@@ -330,7 +330,7 @@ export default function LinkInput({
                                 <IconX size={16} />
                             </motion.div>
 
-                            <p className="flex-1 min-w-0 text-sm leading-5 wrap-break-word">
+                            <p className="flex-1 min-w-0 text-sm leading-5 wrap-break-word text-center">
                                 {error || downloadError}
                             </p>
                         </motion.div>
