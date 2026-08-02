@@ -64,10 +64,10 @@ function Hero({ historyUrl }: HeroProps) {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="flex items-start sm:items-center justify-center gap-2 text-center text-sm sm:text-base max-w-xl mx-auto overflow-hidden"
+                        className="flex items-start justify-center gap-1.5 text-center text-sm sm:text-base max-w-sm sm:max-w-md mx-auto overflow-hidden"
                     >
-                        <IconShieldCheckFilled className="shrink-0 mt-0.5 sm:mt-0 dark:text-green-300 text-green-600" />
-                        <p className="font-extralight dark:text-gray-100 text-gray-900">
+                        <IconShieldCheckFilled className="shrink-0 mt-0.5 dark:text-green-300 text-green-600" size={18} />
+                        <p className="font-extralight dark:text-gray-100 text-gray-900 text-pretty">
                             Tus archivos descargados no se almacenan en nuestros servidores
                         </p>
                     </motion.div>

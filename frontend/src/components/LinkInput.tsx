@@ -20,7 +20,7 @@ interface LinkInputProps {
 
 export default function LinkInput({
     onPreviewChange,
-    historyUrl}: LinkInputProps) {
+    historyUrl }: LinkInputProps) {
     const [url, setUrl] = useState("");
     const currentUrl = url;
 
@@ -219,7 +219,7 @@ export default function LinkInput({
                     whileHover={!loadingInfo && currentUrl.trim() ? { scale: 1.05 } : {}}
                     whileTap={!loadingInfo && currentUrl.trim() ? { scale: 0.95 } : {}}
                     transition={{ duration: 0.2 }}
-                    className="bg-green-400 hover:bg-green-500 disabled:cursor-not-allowed transition-colors px-4 rounded-md text-black flex items-center justify-center gap-2 h-12 shrink-0 hover:cursor-pointer"
+                    className="bg-green-400 hover:bg-green-500 disabled:cursor-not-allowed transition-colors px-4 rounded-md text-black flex items-center justify-center gap-2 h-12 shrink-0 hover:cursor-pointer w-full sm:w-auto"
                 >
                     <div className="overflow-hidden">
                         <AnimatePresence mode="wait" initial={false}>

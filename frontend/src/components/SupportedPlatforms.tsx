@@ -20,7 +20,7 @@ export default function SupportedPlatforms() {
                 Plataformas soportadas
             </h2>
 
-            <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-3 max-w-4xl mx-auto">
                 {platforms.map((platform, i) => {
                     const disabled = DISABLED_PLATFORMS.includes(platform.id);
 
@@ -29,7 +29,7 @@ export default function SupportedPlatforms() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: 0.6 + i * 0.08, ease: "backOut" }}
-                            className="hover:cursor-default"
+                            className="hover:cursor-default w-full sm:w-auto"
                         >
                             <Chip
                                 icon={platform.icon}
@@ -39,7 +39,7 @@ export default function SupportedPlatforms() {
                         </motion.div>
                     );
 
-                    if (!disabled) return <div key={platform.id}>{chip}</div>;
+                    if (!disabled) return <div key={platform.id} className="w-full sm:w-auto">{chip}</div>;
 
                     return (
                         <Tooltip key={platform.id} label="¡Próximamente!" position="top">
@@ -56,6 +56,7 @@ export default function SupportedPlatforms() {
                         delay: 0.6 + platforms.length * 0.08,
                         ease: "backOut",
                     }}
+                    className="w-full sm:w-auto col-span-2 sm:col-span-1"
                 >
                     <Chip
                         icon={IconPlus}

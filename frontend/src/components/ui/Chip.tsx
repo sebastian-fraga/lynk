@@ -18,7 +18,7 @@ export function Chip({
     return (
         <div
             onClick={!isDisabled && isClickable ? onClick : undefined}
-            className={`flex items-center gap-2 px-6 py-2 rounded-4xl transition
+            className={`flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2 rounded-4xl transition
                 ${variant === "outline"
                     ? "border border-dashed border-green-600/40 text-green-700 hover:border-solid hover:border-green-600 hover:bg-green-50 hover:text-black dark:border-emerald-300/40 dark:text-emerald-200/80 dark:hover:border-emerald-300 dark:hover:text-white dark:hover:bg-emerald-500/10"
                     : isDisabled
